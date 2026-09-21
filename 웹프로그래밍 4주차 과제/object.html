@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 생성하기</title>
+
+    <script>
+
+        function register() {
+            this.nStudent++;
+        }
+
+        function unregister() {
+            this.nStudent--;
+        }
+
+        function getStudentCount() {
+           return this.nStudent;
+        }
+
+        let lecture1 = new Object();
+        lecture1.korName = "자바스크립트";
+        lecture1.engName = "JavaScript";
+        lecture1.classCode = "a1";
+        lecture1.nStudent = 1;
+        lecture1.register = register;
+        lecture1.unregister = unregister;
+        lecture1.getStudentCount = getStudentCount;
+
+        let lecture2 = {
+            korName: "자료구조",
+            engName: "DataStructures",
+            classCode: "b1",
+            nStudent: 1,
+            register: register,
+            unregister: unregister,
+            getStudentCount: getStudentCount,
+        };
+
+        function lecture(korName, engName, classCode, nStudent) {
+            this.korName = korName;
+            this.engName = engName;
+            this.classCode = classCode;
+            this.nStudent = nStudent;
+
+            this.register = register;
+            this.unregister = unregister;
+            this.getStudentCount = getStudentCount;
+        };
+
+        let lecture3 = new lecture("운영체제", "OperatingSystems", "c1", 1);
+
+    </script>
+
+</head>
+<body>
+
+    <h2>lecture1 : new Object()로 생성</h2>
+    
+    <h2>lecture2 : 리터럴 표기법으로 생성</h2>
+    
+    <h2>lecture3 : 프로토타입(생성자 함수)으로 생성</h2>
+    
+</body>
+</html>
