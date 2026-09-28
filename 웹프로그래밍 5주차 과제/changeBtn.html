@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>changeBtn</title>
+
+    <script>
+
+        function change(){
+            let obj = document.getElementById("message");
+            obj.innerHTML = "DOM 조작 완료!";
+            obj.style.backgroundColor = "yellow";
+            obj.style.color = "green";
+        }
+
+    </script>
+
+</head>
+<body>
+    <h2 id = "title">5주차 과제1</h2>
+    <div id = "message">DOM을 공부하고 있습니다.</div><br><br>
+
+    <button id = "changeBtn" onclick = "change()">변경하기</button>
+</body>
+</html>

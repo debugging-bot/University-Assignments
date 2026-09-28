@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentList</title>
+
+    <script>
+
+        function add(){
+            let obj = document.getElementById("name");
+            let text = obj.value;
+
+            let newLi = document.createElement("li");
+            newLi.innerHTML = text;
+
+            let parent = document.getElementById("studentList");
+
+            parent.appendChild(newLi);
+
+            newLi.onclick = function(){
+                let p = this.parentElement;
+                p.removeChild(this);
+            };
+        }
+
+    </script>
+
+</head>
+<body>
+    <input id="name" type = "text">
+    <button id ="addBtn" onclick = "add()">학생 추가</button> <br><br>
+
+    <ul id ="studentList"></ul>
+</body>
+</html>
