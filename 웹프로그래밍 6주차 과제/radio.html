@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function fun(){
+            let a = document.getElementsByName("subject");
+            let p = document.getElementById("p");
+            let subject = null;
+            for(let i=0; i<a.length; i++){
+                if(a[i].checked)
+                    subject=a[i]
+            }
+            p.innerHTML = "선택하 분야: " + subject.value; 
+        }
+
+    </script>
+</head>
+<body>
+    <input type="radio" name="subject" onclick="fun()" value="웹 프로그래밍">웹 프로그래밍 <br>
+    <input type="radio" name="subject" onclick="fun()" value="인공지능">인공지능 <br>
+    <input type="radio" name="subject" onclick="fun()" value="클라우드 컴퓨팅">클라우드 컴퓨팅 <br>
+
+    <p id="p"></p>
+</body>
+</html>

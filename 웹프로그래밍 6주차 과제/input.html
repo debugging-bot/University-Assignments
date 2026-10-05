@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function put(e){
+            let p = document.getElementById("p");
+            let text = document.getElementById("text");
+
+            if(e.key === 'Enter'){
+                p.innerHTML = text.value;
+            }
+            else if(e.key === 'Escape'){
+                text.value = "";
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+    <input type="text" id="text" onkeydown="put(event)"> <br>
+    <p  id="p"></p>
+
+</body>
+</html>
