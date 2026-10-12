@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" style="background-color: aquamarine;" width="400" height="300"></canvas>
+    <br>
+    <input type="button" value="Clear" onclick="clearCanvas()">
+
+    <script>
+        let canvas = document.getElementById('myCanvas');
+        let context = canvas.getContext('2d');
+
+        canvas.addEventListener('click', function(event){
+            let x = event.offsetX;
+            let y = event.offsetY;
+
+            context.beginPath();
+            context.arc(x, y, 3, 0, 2*Math.PI);
+            context.fillStyle = "blue";
+            context.fill();
+        })
+
+        function clearCanvas(){
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>

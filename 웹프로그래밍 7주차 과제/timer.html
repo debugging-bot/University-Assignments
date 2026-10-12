@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+
+    <script>
+        let TimerID = null;
+        let seconds = 0;
+
+        function start(){
+            let div = document.getElementById('div');
+            if (TimerID !== null) return;
+            TimerID = setInterval(function(){
+                seconds++;
+                div.innerHTML = '시간: ' + seconds + '초'; 
+            }, 1000);
+        }
+
+        function stop(){
+            clearInterval(TimerID);
+            TimerID=null;
+        }
+
+    </script>
+</head>
+<body>
+    <div id="div"></div>
+    <input type="button" value="Start" onclick="start()"> &nbsp; <input type="button" value="Stop" onclick="stop()">
+</body>
+</html>
