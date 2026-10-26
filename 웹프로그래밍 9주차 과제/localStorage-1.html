@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+    <script>
+        // 설정 저장 : 선택한 값을 localStorage에 저장
+        function saveSetting(){
+            if(!window.localStorage){
+                alert('로컬 스토리지 지원 안됨.');
+                return
+            }
+            localStorage.setItem("fontSize", fontSel.value);
+            localStorage.setItem("bgColor", bgSel.value);
+            alert('설정이 저장되었습니다.');
+        }
+
+        // 설정 적용 : localStorage에 저장된 값으로 페이지 꾸미기
+        function applySetting(){
+            if(!window.localStorage){
+                alert('로컬 스토리지 지원 안됨.');
+                return
+            }
+            let fontSize = localStorage.getItem("fontSize");
+            let bgColor = localStorage.getItem("bgColor");
+
+            if(fontSize == null && bgColor == null){
+                alert('저장된 설정이 없습니다.');
+                return
+            }
+            if(fontSize != null){
+                document.body.style.fontSize = fontSize;   // "" 이면 기본 크기
+                fontSel.value = fontSize;
+            }
+            if(bgColor != null){
+                document.body.style.backgroundColor = bgColor;
+                bgSel.value = bgColor;
+            }
+        }
+
+        // 기본 설정으로 초기화 : 저장된 설정 삭제
+        function resetSetting(){
+            if(!window.localStorage){
+                alert('로컬 스토리지 지원 안됨.');
+                return
+            }
+            localStorage.removeItem("fontSize");
+            localStorage.removeItem("bgColor");
+
+            document.body.style.fontSize = "";
+            document.body.style.backgroundColor = "";
+            fontSel.selectedIndex = 0;
+            bgSel.selectedIndex = 0;
+            alert('기본 설정으로 초기화되었습니다.');
+        }
+    </script>
+</head>
+<body>
+    <h3>웹 페이지 설정</h3>
+    <p>선택한 글자 크기와 배경색을 Local Storage에 저장합니다.</p>
+
+    글자 크기 :
+    <select id="fontSel">
+        <option value="">기본</option>
+        <option value="18px">18px</option>
+        <option value="24px">24px</option>
+    </select>
+    <br><br>
+
+    배경 테마 :
+    <select id="bgSel">
+        <option value="beige">beige</option>
+        <option value="lightblue">lightblue</option>
+    </select>
+    <br><br>
+
+    <input type="button" value="설정 저장" onclick="saveSetting()">
+    <input type="button" value="설정 적용" onclick="applySetting()">
+    <input type="button" value="기본 설정으로 초기화" onclick="resetSetting()">
+
+    <script>
+        let fontSel = document.getElementById("fontSel");
+        let bgSel = document.getElementById("bgSel");
+
+        // 다시 로드했을 때 저장된 설정 자동 적용
+        if(window.localStorage){
+            let fontSize = localStorage.getItem("fontSize");
+            let bgColor = localStorage.getItem("bgColor");
+            if(fontSize != null){
+                document.body.style.fontSize = fontSize;
+                fontSel.value = fontSize;
+            }
+            if(bgColor != null){
+                document.body.style.backgroundColor = bgColor;
+                bgSel.value = bgColor;
+            }
+        }
+    </script>
+</body>
+</html>

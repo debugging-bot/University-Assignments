@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SessionStorage</title>
+    <script>
+        function newtext(){
+            text.value = "";   // 입력창만 비움
+        }
+        function save(){
+            if(!window.sessionStorage){
+                alert('세션 스토리지 지원 안됨.');
+                return
+            }
+            sessionStorage.setItem("memo", text.value);
+            alert('메모가 저장되었습니다.');
+        }
+        function call(){
+            if(!window.sessionStorage){
+                alert('세션 스토리지 지원 안됨.');
+                return
+            }
+            let savedtext = sessionStorage.getItem("memo");
+            if(savedtext == null)
+                alert('저장된 메모가 없습니다.');
+            else
+                text.value = savedtext;
+        }
+        function del(){
+            if(!window.sessionStorage){
+                alert('세션 스토리지 지원 안됨.');
+                return
+            }
+            sessionStorage.removeItem("memo");
+            alert('저장된 메모가 삭제되었습니다.');
+        }
+    </script>
+</head>
+<body>
+    <textarea id="text" cols="60" rows="30"></textarea> <br>
+    <input type="button" value="초기화" onclick="newtext()">
+    <input type="button" value="저장" onclick="save()">
+    <input type="button" value="불러오기" onclick="call()">
+    <input type="button" value="삭제" onclick="del()">
+    
+    <script>
+        let text = document.getElementById("text");
+
+        // 새로고침해도 메모 유지 : 페이지가 열릴 때 저장된 메모를 표시
+        if(window.sessionStorage && sessionStorage.getItem("memo") != null)
+            text.value = sessionStorage.getItem("memo");
+    </script>
+</body>
+</html>

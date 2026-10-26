@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie</title>
+    <script>
+        function GetCookie(name) {
+            let pairs = document.cookie.split(";"); // 쿠키문자열을 ;을 경계로 분할
+            for(var i=0; i<pairs.length; i++) {
+                var pair = pairs[i].trim(); // 쿠키 앞뒤의 빈칸 제거
+                var unit = pair.split("=");
+                if(unit[0] == name)
+                    return unescape(unit[1]);
+            }
+            return null;
+        }
+
+        function SetCookie(name, value, expireDate) {
+            let cookieStr = name + "=" + escape(value) +
+                ((expireDate == null)?"":("; expires=" + expireDate.toGMTString()));
+            document.cookie = cookieStr;
+        }
+
+        function saveName() {
+            let name = document.getElementById("name").value;
+            if(name == "") {
+                alert("이름을 입력해 주십시오.");
+                return;
+            }
+            let expire = new Date(); // 현재 시간
+            expire.setTime(expire.getTime() + (7 * 24 * 3600 * 1000)); // 7일 후
+            SetCookie("username", name, expire);
+            document.getElementById("result").innerHTML = name + "님의 이름이 저장되었습니다.";
+        }
+
+        function showName() {
+            let username = GetCookie("username");
+            if(username == null)
+                document.getElementById("result").innerHTML = "저장된 이름이 없습니다.";
+            else
+                document.getElementById("result").innerHTML = "저장된 이름 : " + username;
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="name">
+    <input type="button" value="저장" onclick="saveName()">
+    <input type="button" value="조회" onclick="showName()">
+    <p id="result"></p>
+</body>
+</html>
