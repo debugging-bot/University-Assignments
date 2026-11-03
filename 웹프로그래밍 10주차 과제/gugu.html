@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>구구단</h1> <hr>
+    <input type="text" id="num1">
+    <input type="button" value="구구단 계산" onclick="multiply()">
+    <div id="div"></div>
+
+    <hr>
+    <h3>main.js</h3>
+<pre><code>function multiply() {
+    let num1 = document.getElementById("num1");
+    let div = document.getElementById("div");
+
+    div.innerHTML = "계산 중...";
+
+    let addWorker = new Worker("worker.js");     // 워커 생성
+
+    addWorker.onmessage = function (e) {         // 워커가 보낸 결과 받기
+        div.innerHTML = e.data.join("&lt;br&gt;");
+        addWorker.terminate();
+    };
+
+    addWorker.postMessage(num1.value);           // 워커에 숫자 전달
+}</code></pre>
+
+    <h3>worker.js</h3>
+<pre><code>onmessage = function (e) {
+    let dan = Number(e.data);   // 메인에서 받은 숫자
+    let result = [];
+
+    for (let i = 1; i &lt;= 9; i++) {
+        result.push(dan + " x " + i + " = " + (dan * i));
+    }
+
+    // "계산 중..."이 보이도록 1초 뒤에 결과 전달
+    setTimeout(function () {
+        postMessage(result);    // 결과를 메인 스레드로 보냄
+    }, 1000);
+};</code></pre>
+</body>
+</html>
